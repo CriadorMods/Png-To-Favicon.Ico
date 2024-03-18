@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="icon" href="favicon.ico">
+<script src="scripts.js" defer></script>
+
+<title>PNG to favicon.ico Converter</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        animation: fadeIn 0.7s ease-in-out forwards;
+    }
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    #fileInput {
+        display: none;
+    }
+    .file-drop-area {
+        background-color: #f3f3f3;
+        border: 2px dashed #007bff;
+        border-radius: 5px;
+        padding: 20px;
+        cursor: pointer;
+    }
+    .file-drop-area.dragover {
+        background-color: #cce5ff;
+    }
+    #convertBtn {
+        background-color: #28a745;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-top: 20px;
+    }
+    #downloadLink {
+        display: none;
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        margin-top: 20px;
+    }
+    .message {
+        margin-top: 20px;
+    }
+    #progressBarContainer {
+        display: none;
+        margin-top: 20px;
+    }
+    #progressBar {
+        width: 100%;
+        height: 20px;
+        background-color: #f3f3f3;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+    #progressBarFill {
+        height: 100%;
+        background-color: #007bff;
+    }
+
+    #warning-message {
+            margin-top: 20px;
+            padding: 10px;
+            background-image: linear-gradient(to right, red, orange);
+            color: #333;
+            border-radius: 5px;
+            display: none;
+        }
+
+        #warning-message .warning-icon {
+            margin-right: 10px;
+        }
+
+    #sizeSelector {
+        margin-top: 10px;
+    }
+
+    #bitDepthSelector {
+        margin-top: 10px;
+    }
+
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1>PNG to favicon.ico Converter</h1>
+        <div id="fileDropArea" class="file-drop-area" ondrop="handleFileDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
+            <span>Drag & Drop PNG File Here</span><br>
+            <span>or</span><br>
+            <label for="fileInput">Click to Select File</label>
+        </div>
+        <input type="file" id="fileInput" />
+        <div id="fileName" style="margin-top: 10px;"></div>
+        <div id="sizeSelector">
+            <input type="radio" id="size16" name="faviconSize" value="16" checked>
+            <label for="size16">16px</label>
+            <input type="radio" id="size32" name="faviconSize" value="32">
+            <label for="size32">32px</label>
+            <input type="radio" id="size48" name="faviconSize" value="48">
+            <label for="size48">48px</label>
+            <input type="radio" id="size64" name="faviconSize" value="64">
+            <label for="size64">64px</label>
+            <input type="radio" id="size128" name="faviconSize" value="128">
+            <label for="size128">128px</label>
+        </div>
+        <div id="bitDepthSelector">
+            <input type="radio" id="bitDepth8" name="bitDepth" value="8" checked>
+            <label for="bitDepth8">8 bits (256 colors, palette)</label>
+            <input type="radio" id="bitDepth32" name="bitDepth" value="32">
+            <label for="bitDepth32">32 bits (16.7M colors & alpha transparency)</label>
+        </div>
+        <br>
+        <canvas id="canvas" style="display: none;"></canvas>
+        <br>
+        <button id="convertBtn">Convert to favicon.ico</button>
+        <br>
+        <a id="downloadLink" style="display: none;">Download favicon.ico</a>
+        <div id="message" class="message"></div>
+        <div id="progressBarContainer">
+            <div id="progressBar">
+                <div id="progressBarFill"></div>
+            </div>
+        </div>
+        <div id="warning-message">
+            <span class="warning-icon"><i class="fas fa-exclamation-triangle"></i></span>
+            <span>The Drag & Drop function DOES NOT work as of now sry :(</span>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
